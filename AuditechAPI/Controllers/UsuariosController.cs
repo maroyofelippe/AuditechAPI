@@ -1,11 +1,12 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Dapper;
-using System.Data;
-using System.Text;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using System.Text;
+using System.Data;
+using Dapper;
 using AuditechAPI.Models;
-using AuditechAPI.DAL;
+using System.Collections.Generic;
+
 
 namespace AuditechAPI.Controllers
 {
@@ -21,19 +22,25 @@ namespace AuditechAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Usuario> GetAll()
-        {
-            using(IDbConnection conexao = ConnectionFactory.GetStringConexao(_config))
-            {
-                conexao.Open();
 
-                StringBuilder sql = new StringBuilder();
+        public ContentResult GetAll([FromServices]IConfiguration config)
+        {
+            using var conexao = new SqlConnection(config.GetConnectionString("ConexaoSomee"));
+            using var cmd = conexao.CreateCommand();
+
+             StringBuilder sql = new StringBuilder();
                 sql.Append("Select IdUsuario as ID, tipoUsuarioIdTipoUsuario as 'Tipo de Usuário', ");
                 sql.Append("nomeUsuario as Nome, cpfUsuario as CPF, dtNascimentoUsuario as 'Data Nascimento' ");
-                sql.Append("from USUARIO ");
+                sql.Append("from USUARIO for JSON PATH, ROOT('Usuario') ");
 
-                return conexao.Query<Usuario>(sql.ToString());
-            }                       
+            cmd.CommandText = sql.ToString();
+
+            conexao.Open();
+            string valorJSON = (string)cmd.ExecuteScalar();
+            conexao.Close();
+
+            return Content(valorJSON, "application/json");
+            
         }
 
          [HttpGet("{id}")]
@@ -41,27 +48,22 @@ namespace AuditechAPI.Controllers
         public ActionResult<Usuario> GetById(int id)
         {
             Usuario p = null;
-            using(IDbConnection conexao = ConnectionFactory.GetStringConexao(_config))
+            using(IDbConnection conexao = DAL.ConnectionFactory.GetStringConexao(_config))
             {
                 conexao.Open();
 
                 StringBuilder sql = new StringBuilder();
-
                 sql.Append("Select IdUsuario as ID, tipoUsuarioIdTipoUsuario as 'Tipo de Usuário', ");
                 sql.Append("nomeUsuario as Nome, cpfUsuario as CPF, dtNascimentoUsuario as 'Data Nascimento' ");
-                sql.Append("from USUARIO where IdUsuario = @Id ");
-
+                sql.Append("from USUARIO where IdUsuario = @id for JSON PATH, ROOT('Usuario') ");
 
                 p = conexao.QueryFirstOrDefault<Usuario>(sql.ToString(), new {Id = id});
-
+                             
                 if(p != null)
                     return p;
                 else
                     return NotFound("Usuário não encontrado");
             }
         }
-
-
-        
     }
 }
