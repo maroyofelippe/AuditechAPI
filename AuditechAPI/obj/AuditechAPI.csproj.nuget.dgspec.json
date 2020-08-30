@@ -46,6 +46,10 @@
               "target": "Package",
               "version": "[2.0.35, )"
             },
+            "Dapper.Contrib": {
+              "target": "Package",
+              "version": "[2.0.35, )"
+            },
             "Microsoft.Data.SqlClient": {
               "target": "Package",
               "version": "[2.0.1, )"

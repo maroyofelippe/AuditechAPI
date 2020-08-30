@@ -35,5 +35,33 @@ namespace AuditechAPI.Controllers
                 return conexao.Query<Usuario>(sql.ToString());
             }                       
         }
+
+         [HttpGet("{id}")]
+
+        public ActionResult<Usuario> GetById(int id)
+        {
+            Usuario p = null;
+            using(IDbConnection conexao = ConnectionFactory.GetStringConexao(_config))
+            {
+                conexao.Open();
+
+                StringBuilder sql = new StringBuilder();
+
+                sql.Append("Select IdUsuario as ID, tipoUsuarioIdTipoUsuario as 'Tipo de Usuário', ");
+                sql.Append("nomeUsuario as Nome, cpfUsuario as CPF, dtNascimentoUsuario as 'Data Nascimento' ");
+                sql.Append("from USUARIO where IdUsuario = @Id ");
+
+
+                p = conexao.QueryFirstOrDefault<Usuario>(sql.ToString(), new {Id = id});
+
+                if(p != null)
+                    return p;
+                else
+                    return NotFound("Usuário não encontrado");
+            }
+        }
+
+
+        
     }
 }

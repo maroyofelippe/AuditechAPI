@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Rmu7xwPtPwMI8osZGM1hzXRHLhTrHQGyH3lBTfmb8nrxHJ/VVZycV8h72au+W3E+z0RnsWgCVDOJIbbjsqtITw==",
+  "dgSpecHash": "4t4FUM12FEJeDFEnmIP42MVvPsPEoqR+KLGWal7PKi37hPeoIVdbGhz6C9ub9jaxGCOPaeSKndA+xAZHDRDY/w==",
   "success": true,
   "projectFilePath": "C:\\Users\\maroy\\HAWGAM\\APIs\\AuditechAPI\\AuditechAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\maroy\\.nuget\\packages\\dapper\\2.0.35\\dapper.2.0.35.nupkg.sha512",
-    "C:\\Users\\maroy\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\maroy\\.nuget\\packages\\dapper.contrib\\2.0.35\\dapper.contrib.2.0.35.nupkg.sha512",
+    "C:\\Users\\maroy\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\maroy\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",
     "C:\\Users\\maroy\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.0.1\\microsoft.data.sqlclient.sni.runtime.2.0.1.nupkg.sha512",
     "C:\\Users\\maroy\\.nuget\\packages\\microsoft.identity.client\\4.14.0\\microsoft.identity.client.4.14.0.nupkg.sha512",
@@ -48,7 +49,7 @@
     "C:\\Users\\maroy\\.nuget\\packages\\system.private.datacontractserialization\\4.3.0\\system.private.datacontractserialization.4.3.0.nupkg.sha512",
     "C:\\Users\\maroy\\.nuget\\packages\\system.private.uri\\4.3.2\\system.private.uri.4.3.2.nupkg.sha512",
     "C:\\Users\\maroy\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
-    "C:\\Users\\maroy\\.nuget\\packages\\system.reflection.emit\\4.3.0\\system.reflection.emit.4.3.0.nupkg.sha512",
+    "C:\\Users\\maroy\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
     "C:\\Users\\maroy\\.nuget\\packages\\system.reflection.emit.ilgeneration\\4.3.0\\system.reflection.emit.ilgeneration.4.3.0.nupkg.sha512",
     "C:\\Users\\maroy\\.nuget\\packages\\system.reflection.emit.lightweight\\4.7.0\\system.reflection.emit.lightweight.4.7.0.nupkg.sha512",
     "C:\\Users\\maroy\\.nuget\\packages\\system.reflection.extensions\\4.3.0\\system.reflection.extensions.4.3.0.nupkg.sha512",
