@@ -7,7 +7,7 @@ namespace AuditechAPI.DAL
 {
     public class ConnectionFactory
     {
-        public static string nomeConexao = "ConexaoSomme";
+        public static string nomeConexao = "ConexaoSomee";
 
         public static IDbConnection GetStringConexao(IConfiguration config)
         {

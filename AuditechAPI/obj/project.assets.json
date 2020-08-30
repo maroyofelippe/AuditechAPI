@@ -5165,7 +5165,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "Dapper >= 2.0.35",
-      "Microsoft.Data.SqlClient >= *"
+      "Microsoft.Data.SqlClient >= 2.0.1"
     ]
   },
   "packageFolders": {
@@ -5216,7 +5216,7 @@
           },
           "Microsoft.Data.SqlClient": {
             "target": "Package",
-            "version": "[*, )"
+            "version": "[2.0.1, )"
           }
         },
         "imports": [
