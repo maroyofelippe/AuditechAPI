@@ -27,7 +27,7 @@ create table CLINICAVIRTUAL	(	idClinicaVirtual					INT				NOT NULL    IDENTITY(5
 go
 /* Tabela 02 -  MIDIA */
 create table MIDIA			(	idMidia 							INT				NOT NULL    IDENTITY(1,1),
-								descicaoMIDIA						VARCHAR(255)			,
+								descricaoMIDIA						VARCHAR(255)			,
 								midiaPath							VARCHAR(255)	NOT NULL,
 								midiaFile							VARBINARY(max)			,
 								/* Adição de PK e FK */
@@ -40,7 +40,7 @@ create table EXERCICIO		(	idExercicio							INT				NOT NULL    IDENTITY(1,1),
 								descricaoExercicio					VARCHAR(255)			,
 								padraoResposta						VARCHAR(255)	NOT NULL,	/* Neste caso tem que ser avaliado o tido das respostas */
 								midiaIDmidia						INT				NOT NULL,
-								profissionalIDprofissional			INT				NOT NULL,	/* Neste caso tem que ser avaliado se este dado sera herdado como fk */
+								profissionalIdProfissional			INT				NOT NULL,	/* Neste caso tem que ser avaliado se este dado sera herdado como fk */
 								/* Adição de PK e FK */
 								constraint IDEXERCICIO_pk			PRIMARY KEY (idExercicio),
 								constraint MIDIA_EXERCICIO_fk		FOREIGN KEY (midiaIDmidia)						references	MIDIA			(idMidia),
@@ -61,7 +61,7 @@ go
 
 /* Tabela 05 - TIPO USUARIO */
 create table TIPOUSUARIO	(	idTipoUsuario						INT				NOT NULL	IDENTITY(1,1),
-								TIPOUSUARIO							VARCHAR(30)		NOT NULL,
+								tipoUsuario							VARCHAR(30)		NOT NULL,
 								descricaoUsuario					VARCHAR(50)		NOT NULL,
 								/* Adição de PK e FK */
 								constraint IDTIPOUSUARIO_pk			PRIMARY KEY	(idTipoUsuario),
