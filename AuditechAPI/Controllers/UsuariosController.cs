@@ -16,13 +16,13 @@ namespace AuditechAPI.Controllers
     [Route("[Controller]")]
     public class UsuariosController : ControllerBase
     {       
-         private readonly IConfiguration _config;
+        private readonly IConfiguration _config;
         public UsuariosController(IConfiguration config){
             _config = config;
         }
 
         [HttpGet]
-        public ContentResult GetAll([FromServices]IConfiguration config)
+        public ContentResult ConsultarAll([FromServices]IConfiguration config)
         {
             using var conexao = new SqlConnection(config.GetConnectionString("ConexaoSomee"));
             using var cmd = conexao.CreateCommand();
@@ -39,7 +39,7 @@ namespace AuditechAPI.Controllers
         }
        
         [HttpGet("{id}")]
-        public ActionResult<Usuario> GetById(int id)
+        public ActionResult<Usuario> ConsultarById(int id)
         {
             Usuario p = null;
             
@@ -60,7 +60,7 @@ namespace AuditechAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Inserir(Usuario p)
+        public IActionResult Cadastrar(Usuario p)
         {
             using (IDbConnection conexao = ConnectionFactory.GetStringConexao(_config))
             {
@@ -94,7 +94,7 @@ namespace AuditechAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Deletar(int id)
         {
             using (IDbConnection conexao = ConnectionFactory.GetStringConexao(_config))
             {
