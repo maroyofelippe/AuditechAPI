@@ -14,8 +14,9 @@ namespace AuditechAPI.Controllers
     [Route("[Controller]")]
     public class TelefonesController : ControllerBase
     {
-         private readonly IConfiguration _config;
-        public TelefonesController(IConfiguration config){
+        private readonly IConfiguration _config;
+        public TelefonesController(IConfiguration config)
+        {
             _config = config;
         }
 
@@ -23,15 +24,15 @@ namespace AuditechAPI.Controllers
         public IEnumerable<Telefone> ConsultarByUserId(int userId)
         //public ActionResult<Telefone> ConsultarById(int id)
         {
-            using(IDbConnection conexao = ConnectionFactory.GetStringConexao(_config))
+            using (IDbConnection conexao = ConnectionFactory.GetStringConexao(_config))
             {
                 conexao.Open();
                 StringBuilder sql = new StringBuilder();
-                    sql.Append("select idTelefone as IdTelefone, tipoTelefone as tipoTelefone, numTelefone as numTelefone, usuarioIdUsuario as usuarioIdUsuario ");
-                    sql.Append("from TELEFONE where usuarioIdusuario = @UserId ");
+                sql.Append("select idTelefone as IdTelefone, tipoTelefone as tipoTelefone, numTelefone as numTelefone, usuarioIdUsuario as usuarioIdUsuario ");
+                sql.Append("from TELEFONE where usuarioIdusuario = @UserId ");
 
-                return conexao.Query<Telefone>(sql.ToString(), new{UserId = userId});
-           }
+                return conexao.Query<Telefone>(sql.ToString(), new { UserId = userId });
+            }
         }
 
         [HttpPost]
@@ -41,9 +42,9 @@ namespace AuditechAPI.Controllers
             {
                 conexao.Open();
                 StringBuilder sql = new StringBuilder();
-                    sql.Append("insert into TELEFONE (tipoTelefone, numTelefone, usuarioIdusuario) ");
-                    sql.Append("values  (@tipoTelefone, @numTelefone, @usuarioIdUsuario) ");
-                    sql.Append("select CAST(SCOPE_IDENTITY() as INT) ");
+                sql.Append("insert into TELEFONE (tipoTelefone, numTelefone, usuarioIdusuario) ");
+                sql.Append("values  (@tipoTelefone, @numTelefone, @usuarioIdUsuario) ");
+                sql.Append("select CAST(SCOPE_IDENTITY() as INT) ");
                 object o = conexao.ExecuteScalar(sql.ToString(), t);
 
                 if (o != null)
@@ -59,9 +60,9 @@ namespace AuditechAPI.Controllers
             {
                 conexao.Open();
                 StringBuilder sql = new StringBuilder();
-                    sql.Append("update TELEFONE set ");
-                    sql.Append("tipoTelefone = @tipoTelefone, numTelefone = @numTelefone ");
-                    sql.Append("where idTelefone = @idTelefone and usuarioIdusuario = @usuarioIdUsuario ");
+                sql.Append("update TELEFONE set ");
+                sql.Append("tipoTelefone = @tipoTelefone, numTelefone = @numTelefone ");
+                sql.Append("where idTelefone = @idTelefone and usuarioIdusuario = @usuarioIdUsuario ");
                 int linhasAfetadas = conexao.Execute(sql.ToString(), t);
                 return Ok(linhasAfetadas);
             }

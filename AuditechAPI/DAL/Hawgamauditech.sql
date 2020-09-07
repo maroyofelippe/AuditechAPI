@@ -159,7 +159,7 @@ create table RESULTADOFASE	(	idResultadoFase						INT				NOT NULL    IDENTITY(1,
 							);
 go
 /* Tabela 12 -  PROFISSIONAL */
-create table PROFISSIONAL	(	idProfissional						INT				NOT NULL,
+create table PROFISSIONAL	(	idProfissional						INT				NOT NULL	IDENTITY(1,1),
 							/*	nomeProfissional					VARCHAR(100)	NOT NULL,
 								cpfProfissional						VARCHAR(20)		NOT NULL,
 							*/	numOrdemProfissional				VARCHAR(30)				,
