@@ -50,12 +50,21 @@ namespace AuditechAPI.Controllers
                     t.idTelefone = Convert.ToInt32(o);
             }
             return Ok(t.idTelefone);
-            
-            
         }
 
-
-
-
+        [HttpPut]
+        public IActionResult Alterar(Telefone t)
+        {
+            using (IDbConnection conexao = ConnectionFactory.GetStringConexao(_config))
+            {
+                conexao.Open();
+                StringBuilder sql = new StringBuilder();
+                    sql.Append("update TELEFONE set ");
+                    sql.Append("tipoTelefone = @tipoTelefone, numTelefone = @numTelefone ");
+                    sql.Append("where idTelefone = @idTelefone and usuarioIdusuario = @usuarioIdUsuario ");
+                int linhasAfetadas = conexao.Execute(sql.ToString(), t);
+                return Ok(linhasAfetadas);
+            }
+        }
     }
 }
