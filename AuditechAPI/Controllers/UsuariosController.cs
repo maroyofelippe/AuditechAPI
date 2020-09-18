@@ -44,7 +44,7 @@ namespace AuditechAPI.Controllers
         }
 
         // Método utilizado para fazer uma consulta de usuário por Id válido
-        // GET - http://url/usuarios/Id
+        // GET - http://url:5000/usuarios/Id
 
         [HttpGet("{id}")]
         public ActionResult<Usuario> ConsultarById(int id)
@@ -97,7 +97,7 @@ namespace AuditechAPI.Controllers
         }
 
         // Após uma consulta, é possível fazer a alteração de um dado do usuário e fazer o update
-        // PUT - http://url/usuarios
+        // PUT - http://url:5000/usuarios
         [HttpPut]
         public IActionResult Alterar(Usuario u)
         {
