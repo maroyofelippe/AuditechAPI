@@ -9,6 +9,7 @@ namespace AuditechAPI.Models
         public string nomeExercicio { get; set; }
         public string descricaoExercicio { get; set; }
         public int padraoRespExercicio { get; set; }
+        public int midiaIdmidia { get; set; }
         public int profissionalIdProfissional { get; set; }
     }
 }

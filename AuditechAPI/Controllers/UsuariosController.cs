@@ -135,6 +135,7 @@ namespace AuditechAPI.Controllers
 
 
         // Valida credencial do usuário com CPF e Data de Nascimento
+        // GET - http://url:5000/uauarios/ValidaUsuario
         // Enviar no Body da requisição:
         /*
         {

@@ -2,7 +2,7 @@ using Dapper.Contrib.Extensions;
 
 namespace AuditechAPI.Models
 {
-    [Table("PARAMETO")]
+    [Table("PARAMETRO")]
     public class Parametro
     {
         public int idParametro { get; set; }

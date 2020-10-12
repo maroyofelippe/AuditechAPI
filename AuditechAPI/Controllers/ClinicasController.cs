@@ -85,7 +85,7 @@ namespace AuditechAPI.Controllers
 
 
         // Método utilizado para fazer uma consulta de todas as Clínicas Virtuais no BD.
-        // GET - http://url:5000/usuarios
+        // GET - http://url:5000/clinicas
         // Este método será usado para manutenção do sistema não estará disponível para usuário final.
 
         [HttpGet]

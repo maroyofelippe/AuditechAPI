@@ -4,7 +4,7 @@ namespace AuditechAPI.Controllers
 {
 
     [ApiController]
-    [Route("[Controller")]
+    [Route("[Controller]")]
     public class FaturamentosController : ControllerBase
     {
 
