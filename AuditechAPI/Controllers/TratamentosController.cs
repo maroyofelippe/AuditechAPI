@@ -15,7 +15,7 @@ namespace AuditechAPI.Controllers
     [Route("[Controller]")]
     public class TratamentosController : ControllerBase
     {
-         private readonly IConfiguration _config;
+        private readonly IConfiguration _config;
         public TratamentosController(IConfiguration config)
         {
             _config = config;
@@ -68,7 +68,7 @@ namespace AuditechAPI.Controllers
             }
         }
 
-        // Método utilizado para fazer uma consulta de um Tratamentos com Id válido
+        // Método utilizado para fazer uma consulta de um Tratamentos com Id de Paciente válido
         // GET - http://url:5000/tratamentos/paciente/Id
 
         [HttpGet("paciente/{id}")]
