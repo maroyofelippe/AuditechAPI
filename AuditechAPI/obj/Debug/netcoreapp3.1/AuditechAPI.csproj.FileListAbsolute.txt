@@ -70,13 +70,3 @@ C:\Users\maroy\HAWGAM\APIs\AuditechAPI\bin\Debug\netcoreapp3.1\publish\appsettin
 C:\Users\maroy\HAWGAM\APIs\AuditechAPI\bin\Debug\netcoreapp3.1\publish\appsettings.json
 C:\Users\maroy\HAWGAM\APIs\AuditechAPI\bin\Debug\netcoreapp3.1\publish\AuditechAPI.deps.json
 C:\Users\maroy\HAWGAM\APIs\AuditechAPI\bin\Debug\netcoreapp3.1\publish\AuditechAPI.runtimeconfig.json
-C:\Users\maroy\HAWGAM\APIs\AuditechAPI\bin\Debug\netcoreapp3.1\publish\publish\publish\web.config
-C:\Users\maroy\HAWGAM\APIs\AuditechAPI\bin\Debug\netcoreapp3.1\publish\publish\web.config
-C:\Users\maroy\HAWGAM\APIs\AuditechAPI\bin\Debug\netcoreapp3.1\publish\publish\appsettings.Development.json
-C:\Users\maroy\HAWGAM\APIs\AuditechAPI\bin\Debug\netcoreapp3.1\publish\publish\appsettings.json
-C:\Users\maroy\HAWGAM\APIs\AuditechAPI\bin\Debug\netcoreapp3.1\publish\publish\AuditechAPI.deps.json
-C:\Users\maroy\HAWGAM\APIs\AuditechAPI\bin\Debug\netcoreapp3.1\publish\publish\AuditechAPI.runtimeconfig.json
-C:\Users\maroy\HAWGAM\APIs\AuditechAPI\bin\Debug\netcoreapp3.1\publish\publish\publish\appsettings.Development.json
-C:\Users\maroy\HAWGAM\APIs\AuditechAPI\bin\Debug\netcoreapp3.1\publish\publish\publish\appsettings.json
-C:\Users\maroy\HAWGAM\APIs\AuditechAPI\bin\Debug\netcoreapp3.1\publish\publish\publish\AuditechAPI.deps.json
-C:\Users\maroy\HAWGAM\APIs\AuditechAPI\bin\Debug\netcoreapp3.1\publish\publish\publish\AuditechAPI.runtimeconfig.json

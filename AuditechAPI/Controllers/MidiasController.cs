@@ -33,7 +33,7 @@ namespace AuditechAPI.Controllers
 
             StringBuilder sql = new StringBuilder();
             sql.Append("Select idMidia as idMidia, descricaoMIDIA as descricaoMidia, ");
-            sql.Append("midiaPath as pathMidia, midiaFile as fileMidia ");
+            sql.Append("midiaPath as pathMidia ");
             sql.Append("FROM MIDIA for JSON PATH, ROOT('MIDIA') ");
             cmd.CommandText = sql.ToString();
             conexao.Open();
@@ -47,9 +47,8 @@ namespace AuditechAPI.Controllers
         // POST - http://url:5000/midias - e no Body da mensagem:
         /*
             {
-            "descricaoMidia": "xxx:",
             "pathMidia": "xxx:",
-            "fileMidia": "xxx:"
+            "descricaoMidia": "xxx:"
             }
         */
         [HttpPost]
@@ -59,8 +58,8 @@ namespace AuditechAPI.Controllers
             {
                 conexao.Open();
                 StringBuilder sql = new StringBuilder();
-                sql.Append("INSERT INTO MIDIA (descricaoMIDIA, midiaPath, midiaFile) ");
-                sql.Append("values (@descricaoMidia, @pathMidia, @fileMidia) ");
+                sql.Append("INSERT INTO MIDIA (midiaPath, descricaoMIDIA) ");
+                sql.Append("values (@pathMidia, @descricaoMidia) ");
                 sql.Append("SELECT CAST(SCOPE_IDENTITY() AS INT) ");
                 object o = conexao.ExecuteScalar(sql.ToString(), m);
 

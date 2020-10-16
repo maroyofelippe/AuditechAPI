@@ -35,7 +35,7 @@ namespace AuditechAPI.Controllers
 
             StringBuilder sql = new StringBuilder();
             sql.Append("Select idExercicio as idExercicio, nomeExercicio as nomeExercicio, ");
-            sql.Append("descricaoExercicio as descricaoExercicio, padraoResposta as padraoRespExercicio, midiaIDmidia as midiaIdMidia, profissionalIdProfissional as profissionalIdProfissional ");
+            sql.Append("descricaoExercicio as descricaoExercicio, padraoResposta as padraoRespExercicio, midiaIDmidia as midiaIdMidia ");
             sql.Append("FROM EXERCICIO for JSON PATH, ROOT('EXERCICIO') ");
             cmd.CommandText = sql.ToString();
             conexao.Open();
@@ -57,7 +57,7 @@ namespace AuditechAPI.Controllers
                 conexao.Open();
                 StringBuilder sql = new StringBuilder();
                 sql.Append("Select idExercicio as idExercicio, nomeExercicio as nomeExercicio, ");
-                sql.Append("descricaoExercicio as descricaoExercicio, padraoResposta as padraoRespExercicio, midiaIDmidia as midiaIdMidia, profissionalIdProfissional as profissionalIdProfissional ");
+                sql.Append("descricaoExercicio as descricaoExercicio, padraoResposta as padraoRespExercicio, midiaIDmidia as midiaIdMidia ");
                 sql.Append("from EXERCICIO where idExercicio = @idExercicio ");
                 e = conexao.QueryFirstOrDefault<Exercicio>(sql.ToString(), new { idExercicio = id });
 
@@ -76,8 +76,7 @@ namespace AuditechAPI.Controllers
             "nomeExercicio": "xxx:",
             "descricaoExercicio": "xxx:",
             "padraoRespExercicio": "xxx:",
-            "midiaIdmidia": "xxx:",
-            "profissionalIdProfissional": "xxx:"
+            "midiaIdmidia": "xxx:"
             }
         */
         [HttpPost]
@@ -87,8 +86,8 @@ namespace AuditechAPI.Controllers
             {
                 conexao.Open();
                 StringBuilder sql = new StringBuilder();
-                sql.Append("INSERT INTO EXERCICIO (nomeExercicio, descricaoExercicio, padraoResposta, midiaIDmidia, profissionalIdProfissional) ");
-                sql.Append("values (@nomeExercicio, @descricaoExercicio, @padraoRespExercicio, @midiaIdMidia, @profissionalIdProfissional) ");
+                sql.Append("INSERT INTO EXERCICIO (nomeExercicio, descricaoExercicio, padraoResposta, midiaIDmidia) ");
+                sql.Append("values (@nomeExercicio, @descricaoExercicio, @padraoRespExercicio, @midiaIdMidia) ");
                 sql.Append("SELECT CAST(SCOPE_IDENTITY() AS INT) ");
                 object o = conexao.ExecuteScalar(sql.ToString(), e);
 
@@ -107,8 +106,7 @@ namespace AuditechAPI.Controllers
             "nomeExercicio": "xxx:",
             "descricaoExercicio": "xxx:",
             "padraoRespExercicio": "xxx:",
-            "midiaIdmidia": "xxx:",
-            "profissionalIdProfissional": "xxx:"
+            "midiaIdmidia": "xxx:"
             }
             */
         [HttpPut]
@@ -120,7 +118,7 @@ namespace AuditechAPI.Controllers
 
                 StringBuilder sql = new StringBuilder();
                 sql.Append("UPDATE EXERCICIO SET ");
-                sql.Append("nomeExercicio = @nomeExercicio, descricaoExercicio = @descricaoExercicio, padraoResposta = @padraRespExercicio, midiaIDmidia = @midiaIdMidia, profissionalIdProfissional = @profissionalIdProfissional ");
+                sql.Append("nomeExercicio = @nomeExercicio, descricaoExercicio = @descricaoExercicio, padraoResposta = @padraRespExercicio, midiaIDmidia = @midiaIdMidia ");
                 sql.Append("WHERE idExercicio = @idExercicio ");
                 int linhasAfetadas = conexao.Execute(sql.ToString(), e);
                 return Ok(linhasAfetadas);

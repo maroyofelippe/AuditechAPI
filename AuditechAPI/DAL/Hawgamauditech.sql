@@ -28,8 +28,7 @@ go
 /* Tabela 02 -  MIDIA */
 create table MIDIA			(	idMidia 							INT				NOT NULL    IDENTITY(1,1),
 								descricaoMIDIA						VARCHAR(255)			,
-								midiaPath							VARCHAR(255)	NOT NULL,
-								midiaFile							VARBINARY(max)			,
+								midiaPath							VARCHAR(255)	NOT NULL
 								/* Adição de PK e FK */
 								constraint IDMIDIA_pk				PRIMARY KEY (idMidia),
 							);
@@ -39,8 +38,7 @@ create table EXERCICIO		(	idExercicio							INT				NOT NULL    IDENTITY(1,1),
 								nomeExercicio						VARCHAR(100)	NOT NULL,
 								descricaoExercicio					VARCHAR(255)			,
 								padraoResposta						VARCHAR(255)	NOT NULL,	/* Neste caso tem que ser avaliado o tido das respostas */
-								midiaIDmidia						INT				NOT NULL,
-								profissionalIdProfissional			INT				NOT NULL,	/* Neste caso tem que ser avaliado se este dado sera herdado como fk */
+								midiaIDmidia						INT				NOT NULL
 								/* Adição de PK e FK */
 								constraint IDEXERCICIO_pk			PRIMARY KEY (idExercicio),
 								constraint MIDIA_EXERCICIO_fk		FOREIGN KEY (midiaIDmidia)						references	MIDIA			(idMidia),

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using AuditechAPI.DAL;
@@ -74,22 +75,17 @@ namespace AuditechAPI.Controllers
         // GET - http://url:5000/treinamentofases/fase/Id
 
         [HttpGet("fase/{id}")]
-        public ActionResult<TreinamentoFase> ConsultarByFaseId(int id)
+        public IEnumerable<TreinamentoFase> ConsultarByFaseId(int id)
         {
-            TreinamentoFase tf = null;
             using (IDbConnection conexao = ConnectionFactory.GetStringConexao(_config))
             {
                 conexao.Open();
                 StringBuilder sql = new StringBuilder();
                 sql.Append("Select idTreinamentoFase as idTreinamentoFase, respostaTreino as respostaTreino, dataExecucao as dataExecucao, faseIDfase as faseIdFase, ");
                 sql.Append("FROM TREINAMENTOFASE where faseIDfase = @faseIdFase ");
-                    tf = conexao.QueryFirstOrDefault<TreinamentoFase>(sql.ToString(), new { faseIdFase = id });
-                if (tf != null)
-                    return tf;
-                else
-                    return NotFound(string.Format("TreinamentoFase com o Fase ID: {0} não encontrado", id));
+
+                return conexao.Query<TreinamentoFase>(sql.ToString(), new { faseIdFase = id});
             }
         }
-
     }
 }
