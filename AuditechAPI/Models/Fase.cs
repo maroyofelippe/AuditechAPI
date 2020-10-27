@@ -13,8 +13,8 @@ namespace AuditechAPI.Models
         public double intervaloTreinoHora { get; set; }
         public double pesoTreino { get; set; }
         public double pesoDesafio { get; set; }
-        public int parametroIdParametro { get; set; }
         public int exercicioIdExercicio { get; set; }
         public int tratamentoIdTratamento { get; set; }
+        /*public int pacienteIdpaciente { get; set; }*/
     }
 }

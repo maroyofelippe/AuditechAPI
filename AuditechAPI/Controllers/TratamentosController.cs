@@ -95,7 +95,7 @@ namespace AuditechAPI.Controllers
 
         // Método será utilizado para inserir um novo Tratamento:
         // Para utilizar o método deverá ser usado:
-        // POST - http://url:5000/tratamento - e no Body da mensagem:
+        // POST - http://url:5000/tratamentos - e no Body da mensagem:
         /*
         {
         "dataInicio": "xxx",
@@ -114,7 +114,7 @@ namespace AuditechAPI.Controllers
                 conexao.Open();
                 StringBuilder sql = new StringBuilder();
                 sql.Append("INSERT INTO TRATAMENTO (dataInicio, observacaoTratamento, statusTratamento, profissionalIDprofissional, pacienteIDpaciente, clinicaIDclinica) ");
-                sql.Append("values (@dataInicio, @observacaoTratamento, @statusTrataento, @profissionalIdProfissional, @pacienteIdPaciente, @clinicaIdClinica) ");
+                sql.Append("values (@dataInicio, @observacaoTratamento, @statusTratamento, @profissionalIdProfissional, @pacienteIdPaciente, @clinicaIdClinica) ");
                 sql.Append("SELECT CAST(SCOPE_IDENTITY() AS INT) ");
                 object o = conexao.ExecuteScalar(sql.ToString(), t);
 

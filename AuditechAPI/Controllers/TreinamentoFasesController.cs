@@ -62,7 +62,7 @@ namespace AuditechAPI.Controllers
             using var cmd = conexao.CreateCommand();
 
             StringBuilder sql = new StringBuilder();
-            sql.Append("Select idTreinamentoFase as idTreinamentoFase, respostaTreino as respostaTreino, dataExecucao as dataExecucao, faseIDfase as faseIdFase, ");
+            sql.Append("Select idTreinamentoFase as idTreinamentoFase, respostaTreino as respostaTreino, dataExecucao as dataExecucao, faseIDfase as faseIdFase, resultadoIDresultadoFase as resultadoIdresultadoFase, resultadoTreino as resultadoTreino ");
             sql.Append("FROM TREINAMENTOFASE for JSON PATH, ROOT('TREINAMENTOFASE') ");
             cmd.CommandText = sql.ToString();
             conexao.Open();
@@ -81,7 +81,7 @@ namespace AuditechAPI.Controllers
             {
                 conexao.Open();
                 StringBuilder sql = new StringBuilder();
-                sql.Append("Select idTreinamentoFase as idTreinamentoFase, respostaTreino as respostaTreino, dataExecucao as dataExecucao, faseIDfase as faseIdFase, ");
+                sql.Append("Select idTreinamentoFase as idTreinamentoFase, respostaTreino as respostaTreino, dataExecucao as dataExecucao, faseIDfase as faseIdFase, resultadoIDresultadoFase as resultadoIdresultadoFase, resultadoTreino as resultadoTreino ");
                 sql.Append("FROM TREINAMENTOFASE where faseIDfase = @faseIdFase ");
 
                 return conexao.Query<TreinamentoFase>(sql.ToString(), new { faseIdFase = id});

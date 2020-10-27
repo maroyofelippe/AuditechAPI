@@ -123,12 +123,12 @@ create table FASE			(	idFase								INT				NOT NULL    IDENTITY(1,1),
 								intervaloTreinoHora					FLOAT			NOT NULL,
 								pesoTreino							FLOAT			NOT NULL,
 								pesoDesafio							FLOAT			NOT NULL,
-								parametroIDparametro				INT				NOT NULL,
+								--parametroIDparametro				INT				NOT NULL,
 								exercicioIDexercicio				INT				NOT NULL,
 								tratamentoIDtratamento				INT				NOT NULL,
 								/* Adi��o PF e FK */
 								constraint IDFASE_pk				PRIMARY KEY	(idFase),
-								constraint PARAMETRO_FASE_fk		FOREIGN KEY (parametroIDparametro)				references PARAMETRO		(idParametro),
+								-- constraint PARAMETRO_FASE_fk		FOREIGN KEY (parametroIDparametro)				references PARAMETRO		(idParametro),
 								constraint EXERCICO_FASE_fk			FOREIGN KEY (exercicioIDexercicio)				references EXERCICIO		(idExercicio),
 								constraint TRATAMENTO_FASE_fk		FOREIGN KEY (tratamentoIDtratamento)			references TRATAMENTO		(idTratamento),
 							);
@@ -136,8 +136,10 @@ go
 /* Tabela 10 -  TREINAMENTO FASE */
 create table TREINAMENTOFASE(	idTreinamentoFase					INT				NOT NULL    IDENTITY(1,1),
 								respostaTreino						VARCHAR(255)			, /* Neste caso tem que ser avaliado o tido das respostas */
+								resultadoTreino						FLOAT					, /* Este Campo receberá o resultado % da trigger para registro.*/
 								dataExecucao						DATETIME		NOT NULL,
 								faseIDfase							INT				NOT NULL, 
+								resultadoIDresultadoFase			INT						, /* Neste caso após a geração do ResultadoFase ou Update, Será necessário fazer um update para registrar este dado.*/
 								/* Adi��o PF e FK */
 								constraint IDTREINAMENTOFASE_pk		PRIMARY KEY (idTreinamentoFase),
 								constraint FASE_TREINAMENTOFASE_fk	FOREIGN KEY (faseIDfase)						references FASE				(idFase),
@@ -148,11 +150,11 @@ create table RESULTADOFASE	(	idResultadoFase						INT				NOT NULL    IDENTITY(1,
 								resultadoFase						FLOAT			NOT NULL, /* Neste caso tem que ser avaliado o tido das respostas */
 								dataTermino							DATETIME		NOT NULL,
 								faseIDfase							INT				NOT NULL, /* Neste caso tem que ser avaliado se este dado sera herdado como fk */
-								treinamentofaseIDtreinamentofase 	INT				NOT NULL,
+								--treinamentofaseIDtreinamentofase 	INT				NOT NULL,
 								pacienteIDpaciente					INT				NOT NULL,
 								/* Adição de PK e FK */
 								constraint IDRESULTADOFASE_pk		PRIMARY KEY (idResultadoFase),
-								constraint TREINAMENTO_RESULTADO_fk	FOREIGN KEY (treinamentofaseIDtreinamentofase)	references TREINAMENTOFASE	(idTreinamentoFase),
+								--constraint TREINAMENTO_RESULTADO_fk	FOREIGN KEY (treinamentofaseIDtreinamentofase)	references TREINAMENTOFASE	(idTreinamentoFase),
 								constraint PACIENTE_RESULTADO_fk	FOREIGN KEY (pacienteIDpaciente)				references PACIENTE			(idPaciente),
 							);
 go

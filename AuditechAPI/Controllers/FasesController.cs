@@ -36,7 +36,7 @@ namespace AuditechAPI.Controllers
             sql.Append("Select idFase as idFase, dataInicio as dataInicio, dataFinal as dataFinal, ");
             sql.Append("numDias as numDias, qtdeTreinoDia as qtdeTreinoDias, intervaloTreinoHora as intervaloTreinoHora, ");
             sql.Append("pesoTreino as pesoTreino, pesoDesafio as pesoDesafio, ");
-            sql.Append("parametroIDparametro as parametroIdParametro, exercicioIDexercicio as exercicioIdExercicio, tratamentoIDtratamento as tratamentoIdTratamento ");
+            sql.Append("exercicioIDexercicio as exercicioIdExercicio, tratamentoIDtratamento as tratamentoIdTratamento ");
             sql.Append("FROM FASE for JSON PATH, ROOT('FASE') ");
             cmd.CommandText = sql.ToString();
             conexao.Open();
@@ -58,10 +58,11 @@ namespace AuditechAPI.Controllers
                 conexao.Open();
                 StringBuilder sql = new StringBuilder();
                 sql.Append("Select idFase as idFase, dataInicio as dataInicio, dataFinal as dataFinal, ");
-                sql.Append("numDias as numDias, qtdeTreinoDia as qtdeTreinoDias, intervaloTreinoHora as intervaloTreinoHora, ");
+                sql.Append("numDias as numDias, qtdeTreinoDia as qtdeTreinoDia, intervaloTreinoHora as intervaloTreinoHora, ");
                 sql.Append("pesoTreino as pesoTreino, pesoDesafio as pesoDesafio, ");
-                sql.Append("parametroIDparametro as parametroIdParametro, exercicioIDexercicio as exercicioIdExercicio, tratamentoIDtratamento as tratamentoIdTratamento ");
-                sql.Append("FROM FASE where idFase = @idFase ");
+                sql.Append("exercicioIDexercicio as exercicioIdExercicio, tratamentoIDtratamento as tratamentoIdTratamento ");
+                sql.Append("FROM FASE as fase where idFase = @idFase ");
+                /*sql.Append("INNER JOIN TRATAMENTO as t ON t.idTratamento = fase.tratamentoIDtratamento ");*/
                     f = conexao.QueryFirstOrDefault<Fase>(sql.ToString(), new { idFase = id });
                 if (f != null)
                     return f;
@@ -83,9 +84,9 @@ namespace AuditechAPI.Controllers
                 conexao.Open();
                 StringBuilder sql = new StringBuilder();
                 sql.Append("Select idFase as idFase, dataInicio as dataInicio, dataFinal as dataFinal, ");
-                sql.Append("numDias as numDias, qtdeTreinoDia as qtdeTreinoDias, intervaloTreinoHora as intervaloTreinoHora, ");
+                sql.Append("numDias as numDias, qtdeTreinoDia as qtdeTreinoDia, intervaloTreinoHora as intervaloTreinoHora, ");
                 sql.Append("pesoTreino as pesoTreino, pesoDesafio as pesoDesafio, ");
-                sql.Append("parametroIDparametro as parametroIdParametro, exercicioIDexercicio as exercicioIdExercicio, tratamentoIDtratamento as tratamentoIdTratamento ");
+                sql.Append("exercicioIDexercicio as exercicioIdExercicio, tratamentoIDtratamento as tratamentoIdTratamento ");
                 sql.Append("FROM FASE where tratamentoIDtratamento = @tratamentoIdTratamento ");
                     f = conexao.QueryFirstOrDefault<Fase>(sql.ToString(), new { tratamentoIdTratamento = id });
                 if (f != null)
@@ -108,7 +109,6 @@ namespace AuditechAPI.Controllers
         "intervaloTreinoHora": "xxx",
         "pesoTreino": "xxx",
         "pesoDesafio": "xxx",
-        "parametroIdParametro": "xxx",
         "exercicioIdExercicio": "xxx",
         "tratamentoIdTratamento": "xxx"
         }
@@ -120,8 +120,8 @@ namespace AuditechAPI.Controllers
             {
                 conexao.Open();
                 StringBuilder sql = new StringBuilder();
-                sql.Append("INSERT INTO FASE (dataInicio, dataFinal, numDias, qtdeTreinoDia, intervaloTreinoHora, pesoTreino, pesoDesafio, parametroIDparametro, exercicioIDexercicio, tratamentoIDtratamento) ");
-                sql.Append("VALUES (@dataInicio, @dataFinal, @numDias, @qtdeTreinoDia, @intervaloTreinoHora, @pesoTreino, pesoDesafio, parametroIdParametro, exercicioIdExercicio, tratamentoIdTratamento ) ");
+                sql.Append("INSERT INTO FASE (dataInicio, dataFinal, numDias, qtdeTreinoDia, intervaloTreinoHora, pesoTreino, pesoDesafio, exercicioIDexercicio, tratamentoIDtratamento) ");
+                sql.Append("VALUES (@dataInicio, @dataFinal, @numDias, @qtdeTreinoDia, @intervaloTreinoHora, @pesoTreino, @pesoDesafio, @exercicioIdExercicio, @tratamentoIdTratamento ) ");
                 sql.Append("SELECT CAST(SCOPE_IDENTITY() AS INT) ");
                 object o = conexao.ExecuteScalar(sql.ToString(), f);
                 if (o != null)
