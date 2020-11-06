@@ -67,6 +67,30 @@ namespace AuditechAPI.Controllers
             }
         }
 
+        // Método utilizado para fazer uma consulta de usuário válido (CPF e dtNascimento)
+        // GET - http://url/usuarios/login/321.654.987-00/1974-06-11
+
+        [HttpGet("login/{nCPF}/{nDTN}")]
+        public ActionResult<Usuario> LoginByCPFdtN(string nCPF, string nDTN)
+        {
+            Usuario u = null;
+
+            using (IDbConnection conexao = ConnectionFactory.GetStringConexao(_config))
+            {
+                conexao.Open();
+                StringBuilder sql = new StringBuilder();
+                sql.Append("Select IdUsuario as IdUsuario, tipoUsuarioIdTipoUsuario as idTipoUsuario, ");
+                sql.Append("nomeUsuario as nome, cpfUsuario as cpf, dtNascimentoUsuario as dataNascimento ");
+                sql.Append("from USUARIO where cpfUsuario = @NCPF AND dtNascimentoUsuario = @NDTN ");
+                u = conexao.QueryFirstOrDefault<Usuario>(sql.ToString(), new { NCPF = nCPF, NDTN = Convert.ToDateTime(nDTN) });
+
+                if (u != null)
+                    return u;
+                else
+                    return NotFound("Login Inválido");
+            }
+        }
+
         // Método será utilizado para inserir um novo usuário:
         // Para utilizar o método deverá ser usado:
         // POST - http://url/usuarios - e no Body da mensagem:

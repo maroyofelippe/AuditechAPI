@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\maroy\\HAWGAM\\APIs\\AuditechAPI\\AuditechAPI.csproj": {}
+    "/home/maroyofelippe/HAWGAM/APIs/AuditechAPI/AuditechAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\maroy\\HAWGAM\\APIs\\AuditechAPI\\AuditechAPI.csproj": {
+    "/home/maroyofelippe/HAWGAM/APIs/AuditechAPI/AuditechAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\maroy\\HAWGAM\\APIs\\AuditechAPI\\AuditechAPI.csproj",
+        "projectUniqueName": "/home/maroyofelippe/HAWGAM/APIs/AuditechAPI/AuditechAPI.csproj",
         "projectName": "AuditechAPI",
-        "projectPath": "C:\\Users\\maroy\\HAWGAM\\APIs\\AuditechAPI\\AuditechAPI.csproj",
-        "packagesPath": "C:\\Users\\maroy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\maroy\\HAWGAM\\APIs\\AuditechAPI\\obj\\",
+        "projectPath": "/home/maroyofelippe/HAWGAM/APIs/AuditechAPI/AuditechAPI.csproj",
+        "packagesPath": "/home/maroyofelippe/.nuget/packages/",
+        "outputPath": "/home/maroyofelippe/HAWGAM/APIs/AuditechAPI/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\maroy\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "/home/maroyofelippe/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -73,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -96,6 +96,32 @@ namespace AuditechAPI.Controllers
             }
         }
 
+        // Método utilizado para fazer uma consulta de uma Fase com Id de tratamento válido
+        // GET - http://url:5000/fases/tratamento/Id
+
+        [HttpGet("usuario/{id}")]
+        public ActionResult<Fase> ConsultarByUsuarioId(int id)
+        {
+            Fase f = null;
+
+            using (IDbConnection conexao = ConnectionFactory.GetStringConexao(_config))
+            {
+                conexao.Open();
+                StringBuilder sql = new StringBuilder();
+                sql.Append("Select idFase as idFase, dataInicio as dataInicio, dataFinal as dataFinal, ");
+                sql.Append("numDias as numDias, qtdeTreinoDia as qtdeTreinoDia, intervaloTreinoHora as intervaloTreinoHora, ");
+                sql.Append("pesoTreino as pesoTreino, pesoDesafio as pesoDesafio, ");
+                sql.Append("exercicioIDexercicio as exercicioIdExercicio, tratamentoIDtratamento as tratamentoIdTratamento ");
+                sql.Append("FROM FASE where tratamentoIDtratamento = (SELECT idTratamento FROM TRATAMENTO WHERE pacienteIDpaciente = ");
+                sql.Append("(SELECT idPaciente FROM PACIENTE WHERE usuarioIdusuario = @usuarioIdUsuario)) ");
+                    f = conexao.QueryFirstOrDefault<Fase>(sql.ToString(), new { usuarioIdUsuario = id });
+                if (f != null)
+                    return f;
+                else
+                    return NotFound(string.Format("Fase com o Tratamento ID: {0} não encontrado", id));
+            }
+        }
+
         // Método será utilizado para inserir uma nova Fase:
         // Para utilizar o método deverá ser usado:
         // POST - http://url:5000/fases - e no Body da mensagem:

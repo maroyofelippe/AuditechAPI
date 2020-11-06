@@ -69,10 +69,10 @@ namespace AuditechAPI.Controllers
         }
 
         // Método utilizado para fazer uma consulta de um Tratamentos com Id de Paciente válido
-        // GET - http://url:5000/tratamentos/paciente/Id
+        // GET - http://url:5000/tratamentos/usuario/Id
 
-        [HttpGet("paciente/{id}")]
-        public ActionResult<Tratamento> ConsultarByPacienteId(int id)
+        [HttpGet("usuario/{id}")]
+        public ActionResult<Tratamento> ConsultarByUsuarioId(int id)
         {
             Tratamento t = null;
 
@@ -83,13 +83,14 @@ namespace AuditechAPI.Controllers
                 sql.Append("Select idTratamento as idTratamento, dataInicio as dataInicio, dataTermino as dataTermino, ");
                 sql.Append("observacaoTratamento as observacaoTratamento, ");
                 sql.Append("profissionalIDprofissional as profissionalIdProfissional, pacienteIDpaciente as pacienteIdpaciente, clinicaIDclinica as clinicaIdClinica ");
-                sql.Append("FROM TRATAMENTO where pacienteIDpaciente = @pacienteIdPaciente ");
-                    t = conexao.QueryFirstOrDefault<Tratamento>(sql.ToString(), new { pacienteIdPaciente = id });
+                sql.Append("FROM TRATAMENTO where pacienteIDpaciente = (SELECT idPaciente FROM PACIENTE WHERE usuarioIdusuario = @usuarioIdUsuario) ");
+                /*sql.Append("FROM TRATAMENTO where pacienteIDpaciente = @pacienteIdPaciente ");*/
+                    t = conexao.QueryFirstOrDefault<Tratamento>(sql.ToString(), new { usuarioIdUsuario = id });
 
                 if (t != null)
                     return t;
                 else
-                    return NotFound(string.Format("Tratamento para Paciente com o ID: {0} não encontrado", id));
+                    return NotFound(string.Format("Tratamento para Paciente com o UsuárioID: {0} não encontrado", id));
             }
         }
 
