@@ -1,0 +1,15 @@
+{
+  "FilePath": "z:\\HAWGAM\\APIs\\AuditechAPI\\AuditechAPI.csproj",
+  "Configuration": {
+    "ConfigurationName": "Default",
+    "LanguageVersion": "5.0",
+    "Extensions": []
+  },
+  "ProjectWorkspaceState": {
+    "TagHelpers": [],
+    "CSharpLanguageVersion": 900
+  },
+  "RootNamespace": "AuditechAPI",
+  "Documents": [],
+  "SerializationFormat": "0.2"
+}

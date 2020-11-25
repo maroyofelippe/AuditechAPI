@@ -6,7 +6,7 @@ namespace AuditechAPI.Models
     public class TreinamentoFase
     {
         public int idTreinamentoFase { get; set; }
-        public int respostaTreino { get; set; }
+        public string respostaTreino { get; set; }
         public string dataExecucao { get; set; }
         public int faseIdFase { get; set; }
         public float resultadoTreino { get; set; }

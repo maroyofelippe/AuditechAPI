@@ -1,29 +1,36 @@
 {
   "format": 1,
   "restore": {
-    "/home/maroyofelippe/HAWGAM/APIs/AuditechAPI/AuditechAPI.csproj": {}
+    "Z:\\HAWGAM\\APIs\\AuditechAPI\\AuditechAPI.csproj": {}
   },
   "projects": {
-    "/home/maroyofelippe/HAWGAM/APIs/AuditechAPI/AuditechAPI.csproj": {
+    "Z:\\HAWGAM\\APIs\\AuditechAPI\\AuditechAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/maroyofelippe/HAWGAM/APIs/AuditechAPI/AuditechAPI.csproj",
+        "projectUniqueName": "Z:\\HAWGAM\\APIs\\AuditechAPI\\AuditechAPI.csproj",
         "projectName": "AuditechAPI",
-        "projectPath": "/home/maroyofelippe/HAWGAM/APIs/AuditechAPI/AuditechAPI.csproj",
-        "packagesPath": "/home/maroyofelippe/.nuget/packages/",
-        "outputPath": "/home/maroyofelippe/HAWGAM/APIs/AuditechAPI/obj/",
+        "projectPath": "Z:\\HAWGAM\\APIs\\AuditechAPI\\AuditechAPI.csproj",
+        "packagesPath": "C:\\Users\\maroy\\.nuget\\packages\\",
+        "outputPath": "Z:\\HAWGAM\\APIs\\AuditechAPI\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "/home/maroyofelippe/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\maroy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -35,18 +42,19 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Dapper": {
               "target": "Package",
-              "version": "[2.0.35, )"
+              "version": "[2.0.78, )"
             },
             "Dapper.Contrib": {
               "target": "Package",
-              "version": "[2.0.35, )"
+              "version": "[2.0.78, )"
             },
             "Microsoft.Data.SqlClient": {
               "target": "Package",
-              "version": "[2.0.1, )"
+              "version": "[2.1.0, )"
             }
           },
           "imports": [
@@ -67,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
