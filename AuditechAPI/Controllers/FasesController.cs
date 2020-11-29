@@ -113,12 +113,12 @@ namespace AuditechAPI.Controllers
                 sql.Append("pesoTreino as pesoTreino, pesoDesafio as pesoDesafio, ");
                 sql.Append("exercicioIDexercicio as exercicioIdExercicio, tratamentoIDtratamento as tratamentoIdTratamento ");
                 sql.Append("FROM FASE where tratamentoIDtratamento = (SELECT idTratamento FROM TRATAMENTO WHERE pacienteIDpaciente = ");
-                sql.Append("(SELECT idPaciente FROM PACIENTE WHERE usuarioIdusuario = @usuarioIdUsuario)) ");
+                sql.Append("(SELECT idPaciente FROM PACIENTE WHERE usuarioIdusuario = @usuarioIdUsuario)) AND dataFinal >= CURRENT_TIMESTAMP ");
                     f = conexao.QueryFirstOrDefault<Fase>(sql.ToString(), new { usuarioIdUsuario = id });
                 if (f != null)
                     return f;
                 else
-                    return NotFound(string.Format("Fase com o Tratamento ID: {0} não encontrado", id));
+                    return NotFound(string.Format("Fase para o Usuário ID: {0} não encontrado", id));
             }
         }
 
