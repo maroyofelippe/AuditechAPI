@@ -41,8 +41,8 @@ namespace AuditechAPI.Controllers
             {
                 conexao.Open();
                 StringBuilder sql = new StringBuilder();
-                sql.Append("INSERT INTO TREINAMENTOFASE (respostaTreino, dataExecucao, faseIDfase) ");
-                sql.Append("VALUES (@respostaTreino, @dataExecucao, @faseIdFase ) ");
+                sql.Append("INSERT INTO TREINAMENTOFASE (respostaTreino, dataExecucao, faseIDfase, exercicioIdExercicio ) ");
+                sql.Append("VALUES (@respostaTreino, @dataExecucao, @faseIdFase, @exercicioIdExercicio ) ");
                 sql.Append("SELECT CAST(SCOPE_IDENTITY() AS INT) ");
                 object o = conexao.ExecuteScalar(sql.ToString(), tf);
                 if (o != null)

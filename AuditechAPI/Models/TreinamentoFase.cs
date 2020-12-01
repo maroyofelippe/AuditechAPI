@@ -11,5 +11,6 @@ namespace AuditechAPI.Models
         public int faseIdFase { get; set; }
         public float resultadoTreino { get; set; }
         public int resultadoIdresultadoFase { get; set; }
+        public int exercicioIdExercicio { get; set; }
     }
 }

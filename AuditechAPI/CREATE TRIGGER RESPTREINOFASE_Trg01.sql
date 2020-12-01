@@ -1,4 +1,4 @@
-CREATE TRIGGER RESPTREINOFASE_Trg01 ON TREINAMENTOFASE
+ALTER TRIGGER RESPTREINOFASE_Trg01 ON TREINAMENTOFASE
 FOR INSERT
 AS
 BEGIN
@@ -9,6 +9,8 @@ BEGIN
     DECLARE @count1 INT, @count2 INT, @count3 INT, @count4 INT;
     DECLARE @letra1 CHAR(1), @letra2 CHAR(1);
     DECLARE @resultado FLOAT, @count5 FLOAT, @count6 FLOAT;
+    DECLARE @qtdeResultadoFase INT;
+    DECLARE @resultadoIDFase INT;
     --Declaracao de Tabelas Auxiliares
     DECLARE @TrespPadrao TABLE (ID INT, letra CHAR(1));
     DECLARE @TrespTreino TABLE (ID INT, letra CHAR(1));
@@ -19,12 +21,14 @@ BEGIN
     SELECT @count4 = 1;
     SELECT @count5 = 1.0;
     SELECT @count6 = 0.0;
+    SELECT @qtdeResultadoFase = (SELECT rf.qtdeResultadoFase FROM RESULTADOFASE AS rf WHERE rf.faseIDfase = (SELECT INS.faseIDfase FROM inserted AS INS)) + 1;
+    SELECT @resultadoIDFase = (SELECT rf.idResultadoFase FROM RESULTADOFASE as rf WHERE rf.faseIDfase = (SELECT INS.faseIDfase FROM inserted AS INS));
     SET NOCOUNT ON;
 
     IF EXISTS(SELECT 1 FROM inserted as INS) AND NOT EXISTS(SELECT 1 FROM deleted)
     BEGIN
         --Selecionando as Respostas
-        SELECT @respostaPadrao = padraoResposta FROM EXERCICIO WHERE idExercicio = 1;
+        SELECT @respostaPadrao = padraoResposta FROM EXERCICIO WHERE idExercicio = (SELECT INS.exercicioIdExercicio FROM inserted as INS);
         SELECT @respostaTreinamento = respostaTreino FROM TREINAMENTOFASE WHERE idTreinamentoFase = (SELECT INS.idTreinamentoFase FROM inserted as INS);
         --Determinando o tamanho das respostas
         SELECT @tamRespPadrao = LEN(@respostaPadrao)
@@ -71,7 +75,29 @@ BEGIN
         SELECT @resultado = (@count6 * 100) / (@count5 - 2);
         --Grava resultado do treinamento no TreinamentoFase
         UPDATE TREINAMENTOFASE
-        SET resultadoTreino = (SELECT @resultado)
+        SET resultadoTreino = (SELECT @resultado),
+            resultadoIDresultadoFase = @resultadoIDFase
         WHERE idTreinamentoFase = (SELECT INS.idTreinamentoFase FROM inserted as INS);
+
+        IF EXISTS(SELECT 1 FROM RESULTADOFASE as ResF WHERE ResF.faseIDFase = (SELECT INS.faseIDfase FROM inserted as INS))
+        BEGIN
+            IF((SELECT rf.qtdeResultadoFase FROM RESULTADOFASE AS rf WHERE rf.faseIDFase = (SELECT INS.faseIDfase FROM inserted as INS)) = 0)
+            BEGIN
+            UPDATE RESULTADOFASE
+                SET resultadoFase = (SELECT @resultado),
+                    qtdeResultadoFase = @qtdeResultadoFase                    
+                WHERE faseIDFase = (SELECT INS.faseIDfase FROM inserted as INS) ;
+            END
+            ELSE
+            BEGIN
+                UPDATE RESULTADOFASE
+                SET resultadoFase = (SELECT AVG(tf.resultadoTreino) FROM TREINAMENTOFASE as tf 
+                                                WHERE tf.resultadoIDresultadoFase = (SELECT @resultadoIDFase)),
+                --(((SELECT resultadoFase FROM RESULTADOFASE 
+                --                                            WHERE faseIDfase = (SELECT INS.faseIDfase FROM inserted as INS)) + (SELECT @resultado)) / (SELECT @qtdeResultadoFase)),
+                    qtdeResultadoFase = @qtdeResultadoFase
+                WHERE faseIDFase = (SELECT INS.faseIDfase FROM inserted as INS);
+            END
+        END
     END
 END
