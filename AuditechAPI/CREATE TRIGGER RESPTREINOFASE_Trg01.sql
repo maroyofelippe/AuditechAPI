@@ -8,7 +8,8 @@ BEGIN
     DECLARE @tamRespPadrao INT, @tamRespTreinamento INT;
     DECLARE @count1 INT, @count2 INT, @count3 INT, @count4 INT;
     DECLARE @letra1 CHAR(1), @letra2 CHAR(1);
-    DECLARE @resultado FLOAT, @count5 FLOAT, @count6 FLOAT;
+    DECLARE @resultado FLOAT, @count5 FLOAT, @count6 FLOAT, @count7 FLOAT, @count8 FLOAT;
+    DECLARE @resultadoNR FLOAT, @resultadoErro FLOAT;
     DECLARE @qtdeResultadoFase INT;
     DECLARE @resultadoIDFase INT;
     --Declaracao de Tabelas Auxiliares
@@ -21,6 +22,9 @@ BEGIN
     SELECT @count4 = 1;
     SELECT @count5 = 1.0;
     SELECT @count6 = 0.0;
+    SELECT @count7 = 0.0;
+    SELECT @count8 = 0.0;
+
     SELECT @qtdeResultadoFase = (SELECT rf.qtdeResultadoFase FROM RESULTADOFASE AS rf WHERE rf.faseIDfase = (SELECT INS.faseIDfase FROM inserted AS INS)) + 1;
     SELECT @resultadoIDFase = (SELECT rf.idResultadoFase FROM RESULTADOFASE as rf WHERE rf.faseIDfase = (SELECT INS.faseIDfase FROM inserted AS INS));
     SET NOCOUNT ON;
@@ -69,14 +73,26 @@ BEGIN
             BEGIN
                 SELECT @count6 = @count6 + 1;
             END
+            IF(@letra1 != @letra2 AND @letra2 != 'N')
+            BEGIN
+                SELECT @count7 = @count7 + 1;
+            END
+            IF(@letra2 = 'N')
+            BEGIN
+                SELECT @count8 = @count8 + 1;
+            END
             SELECT @count5 = @count5 +1;
         END
         --Calculando o Percentual de acertos
-        SELECT @resultado = (@count6 * 100) / (@count5 - 2);
+        SELECT @resultado = ((@count6 -1) * 100) / (@count5 - 2);
+        SELECT @resultadoErro = ((@count7) * 100) / (@count5 - 2);
+        SELECT @resultadoNR = ((@count8) * 100) / (@count5 - 2);
         --Grava resultado do treinamento no TreinamentoFase
         UPDATE TREINAMENTOFASE
         SET resultadoTreino = (SELECT @resultado),
-            resultadoIDresultadoFase = @resultadoIDFase
+            resultadoIDresultadoFase = @resultadoIDFase,
+            treinoResultadoNR = (SELECT @resultadoNR),
+            treinoResultadoErros = (SELECT @resultadoErro)
         WHERE idTreinamentoFase = (SELECT INS.idTreinamentoFase FROM inserted as INS);
 
         IF EXISTS(SELECT 1 FROM RESULTADOFASE as ResF WHERE ResF.faseIDFase = (SELECT INS.faseIDfase FROM inserted as INS))
@@ -85,6 +101,8 @@ BEGIN
             BEGIN
             UPDATE RESULTADOFASE
                 SET resultadoFase = (SELECT @resultado),
+                    resultadoNR = (SELECT @resultadoNR),
+                    resultadoErros = (SELECT @resultadoErro),
                     qtdeResultadoFase = @qtdeResultadoFase                    
                 WHERE faseIDFase = (SELECT INS.faseIDfase FROM inserted as INS) ;
             END
@@ -93,8 +111,10 @@ BEGIN
                 UPDATE RESULTADOFASE
                 SET resultadoFase = (SELECT AVG(tf.resultadoTreino) FROM TREINAMENTOFASE as tf 
                                                 WHERE tf.resultadoIDresultadoFase = (SELECT @resultadoIDFase)),
-                --(((SELECT resultadoFase FROM RESULTADOFASE 
-                --                                            WHERE faseIDfase = (SELECT INS.faseIDfase FROM inserted as INS)) + (SELECT @resultado)) / (SELECT @qtdeResultadoFase)),
+                    resultadoErros = (SELECT AVG(tf.treinoResultadoErros) FROM TREINAMENTOFASE as tf 
+                                                WHERE tf.resultadoIDresultadoFase = (SELECT @resultadoIDFase)),
+                    resultadoNR = (SELECT AVG(tf.treinoResultadoNR) FROM TREINAMENTOFASE as tf 
+                                                WHERE tf.resultadoIDresultadoFase = (SELECT @resultadoIDFase)),
                     qtdeResultadoFase = @qtdeResultadoFase
                 WHERE faseIDFase = (SELECT INS.faseIDfase FROM inserted as INS);
             END

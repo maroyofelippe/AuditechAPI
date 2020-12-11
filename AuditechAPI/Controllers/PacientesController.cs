@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using AuditechAPI.DAL;
@@ -131,6 +132,26 @@ namespace AuditechAPI.Controllers
                     return NotFound("Paciente não encontrado");
             }
         }
+
+        // Método utilizado para fazer uma consulta de Pacientes associados ao profissional
+        // GET - http://url:5000/pacientes/profissional/Id
+
+        [HttpGet("profissional/{id}")]
+        public IEnumerable<Paciente> ConsultarByProfissionalId(int id)
+        {
+            using (IDbConnection conexao = ConnectionFactory.GetStringConexao(_config))
+            {
+                conexao.Open();
+                StringBuilder sql = new StringBuilder();
+                sql.Append("select idPaciente as  idPaciente, statusPaciente as statusPaciente, ");
+                sql.Append("nomePai as nomePai, cpfPai as cpfPai, nomeMae as nomeMae, cpfMae as cpfMae, ");
+                sql.Append("enderecoPaciente as enderPaciente, complementoEnder as compEnderPaciente, cepPaciente as cepPaciente, cidadePaciente as cidadePaciente, ufPaciente as ufPaciente, ");
+                sql.Append("clinicaIDclinica as clinicaIdClinica, usuarioIdusuario as usuarioIdusuario ");
+                sql.Append("from PACIENTE where clinicaIDclinica = (SELECT cv.idClinicaVirtual FROM CLINICAVIRTUAL as cv INNER JOIN PROFISSIONAL as pro ON pro.clinicaIDclinica = cv.idClinicaVirtual AND pro.idProfissional = @profissionalId) "); 
+                return conexao.Query<Paciente>(sql.ToString(), new { profissionalId = id });
+            }
+        }
+
 
         // Após uma consulta, é possível fazer a alteração de um dado do Paciente e fazer o update
         // PUT - http://url:5000/pacientes
