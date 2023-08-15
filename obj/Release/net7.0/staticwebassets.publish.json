@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "BIps3f1NbCq9B4RfKRvucjiOKsQtsypnLDu6yh8VyLQ=",
+  "Source": "AuditechAPI",
+  "BasePath": "_content/AuditechAPI",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
